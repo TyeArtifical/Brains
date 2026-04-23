@@ -1,0 +1,239 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "toolDescription": "The Requests bot that can execute various web requests.\n\nThe base system prompt is: \n\"You are a web requests bot. Your role is to execute web requests fast and simply. Always execute the correct web request. Examples of web request URLs are below for different purposes.\n\nSEARCHING: https://searx-096.stufy.qzz.io/search?q=hello where hello is the thing you want to search. For spaces, do %20 (encode in URL format). This is done with the Search tool and the search engine is searxng. Once you find a website you need, if you need to, then create a request to that website to get its content. Do this with the various requests tools.\n\nVARIOUS REQUESTS: Any request URL. This is done with the various requests tools.\n\nAnother job you have is to turn unreadable websites into readable texts to make it easier to read. Do this when asked.\n\nExample: You need to find the URL for an api:\n1. Search up what the API endpoints are\n2. Go to the website and read more\n3. Test them to get more information\n\"\n(although, you can add/change this prompt to fit what you need it to do related to web requests)",
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
+        "needsFallback": true,
+        "options": {
+          "systemMessage": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('System_Message', ``, 'string') }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 2.2,
+      "position": [
+        1696,
+        704
+      ],
+      "id": "9f3a6015-6581-4d13-b442-88c71262b708",
+      "name": "Requests Bot"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.query.sessionid }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        1792,
+        912
+      ],
+      "id": "bea1e926-7f9f-4ec8-804b-1477b317b799",
+      "name": "Simple Memory2"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Make any HTTP GET request to a website",
+        "url": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('URL', ``, 'string') }}",
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        1920,
+        1072
+      ],
+      "id": "9c78329b-d073-46da-b429-995e42760f25",
+      "name": "Various GET Requests"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Make any HTTP GET request to a website",
+        "method": "OPTIONS",
+        "url": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('URL', ``, 'string') }}",
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        1792,
+        1072
+      ],
+      "id": "49dc41d6-78a1-4828-908d-ee7a1639a54c",
+      "name": "Various OPTIONS Requests"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Make any HTTP GET request to a website",
+        "method": "POST",
+        "url": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('URL', ``, 'string') }}",
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        1632,
+        1072
+      ],
+      "id": "e2e58b1a-62d7-4190-881d-041c9a75d5a4",
+      "name": "Various POST Requests"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Makes a HTTP request to a locally hosted search engine called SearXNG.",
+        "url": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('URL', `The template request URL for searching something up is: https://searx-096.stufy.qzz.io/search?q=hello where hello is the thing you want to search. For spaces, do %20 (encode in URL format).`, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        1920,
+        912
+      ],
+      "id": "637d7461-c6cd-4476-9d50-ba775472a752",
+      "name": "Search3"
+    },
+    {
+      "parameters": {
+        "model": "google/gemma-4-26b-a4b-it:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        1584,
+        912
+      ],
+      "id": "08eeb4d0-1f57-4d5d-8165-ee303b882c97",
+      "name": "Gemma Backup1",
+      "credentials": {
+        "openRouterApi": {
+          "id": "lhZFtxiKyhYfkvFo",
+          "name": "OpenRouter account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        1504,
+        1088
+      ],
+      "id": "080c19ca-2ee0-4fa1-ab0b-9f274c9a9a87",
+      "name": "GPT Main1",
+      "credentials": {
+        "openRouterApi": {
+          "id": "lhZFtxiKyhYfkvFo",
+          "name": "OpenRouter account 2"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Requests Bot": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Simple Memory2": {
+      "ai_memory": [
+        [
+          {
+            "node": "Requests Bot",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Various GET Requests": {
+      "ai_tool": [
+        [
+          {
+            "node": "Requests Bot",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Various OPTIONS Requests": {
+      "ai_tool": [
+        [
+          {
+            "node": "Requests Bot",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Various POST Requests": {
+      "ai_tool": [
+        [
+          {
+            "node": "Requests Bot",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search3": {
+      "ai_tool": [
+        [
+          {
+            "node": "Requests Bot",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemma Backup1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Requests Bot",
+            "type": "ai_languageModel",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "GPT Main1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Requests Bot",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ac93e5bd7c363ccb29cb72c90523c0a98deb0e69a722eb7e0b7d950037363d1a"
+  }
+}
