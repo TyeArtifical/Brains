@@ -121,7 +121,7 @@
       "name": "Gemma Backup1",
       "credentials": {
         "openRouterApi": {
-          "id": "lhZFtxiKyhYfkvFo",
+          "id": "0000000",
           "name": "OpenRouter account 2"
         }
       }
@@ -141,7 +141,7 @@
       "name": "GPT Main1",
       "credentials": {
         "openRouterApi": {
-          "id": "lhZFtxiKyhYfkvFo",
+          "id": "0000000",
           "name": "OpenRouter account 2"
         }
       }
