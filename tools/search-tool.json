@@ -1,0 +1,31 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "toolDescription": "Makes a HTTP request to a locally hosted search engine called SearXNG.",
+        "url": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('URL', `The template request URL for searching something up is: https://searx-096.stufy.qzz.io/search?q=hello where hello is the thing you want to search. For spaces, do %20 (encode in URL format).`, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        208,
+        336
+      ],
+      "id": "bb6eaa78-c6df-474e-8f9e-f3bd5169d8a1",
+      "name": "Search"
+    }
+  ],
+  "connections": {
+    "Search": {
+      "ai_tool": [
+        []
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ac93e5bd7c363ccb29cb72c90523c0a98deb0e69a722eb7e0b7d950037363d1a"
+  }
+}
